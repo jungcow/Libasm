@@ -3,29 +3,7 @@ section		.text
 
 _ft_strcmp:
 			mov		rcx, 0
-			jmp		nullcheck1
-
-nullcheck1:
-			test	rdi, rdi
-			jne		nullcheck2
-			test	rsi, rsi
-			jne		destnull
-			mov		rax, 0
-			ret
-nullcheck2:
-			test	rsi, rsi
-			jz		srcnull
 			jmp		loop
-
-destnull:
-			xor		rax, rax
-			mov		al, BYTE[rsi]
-			neg		rax
-			ret
-srcnull:
-			xor		rax, rax
-			mov		al, BYTE[rdi]
-			ret
 
 loop:
 			cmp		BYTE[rdi + rcx], 0

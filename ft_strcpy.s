@@ -9,14 +9,11 @@ _ft_strcpy:
 loop:
 			cmp		BYTE[rsi], 0
 			je		end
-
 			mov		ah, BYTE [rsi]
 			mov		BYTE[rdi], ah
-
 			inc		rdi
 			inc		rsi
 			inc		rcx
-
 			jmp		loop
 
 end:	

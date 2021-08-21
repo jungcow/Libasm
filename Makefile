@@ -37,5 +37,5 @@ fclean	:	clean
 re		:	fclean all
 
 test	:	all
-	$(CC) $(LIBS) $(CFLAGS) main.c -g3
+	$(CC) $(LIBS) $(CFLAGS) main.c
 
