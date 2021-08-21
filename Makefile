@@ -1,6 +1,13 @@
+.PHONY	:	re fclean clean all
 NAME	=	libasm.a
-CC		=	nasm
-CFLAGS	=	-f macho64
+AS		=	nasm
+CC		=	gcc
+AR		=	ar
+ASFLAGS	=	-f macho64
+CFLAGS	=	-Werror -Wall -Wextra
+ARFLAGS	=	rcs
+
+LIBS	=	-L. -lasm
 
 SRCS	=	ft_write.s \
 			ft_read.s \
@@ -9,22 +16,26 @@ SRCS	=	ft_write.s \
 			ft_strcmp.s \
 			ft_strdup.s 
 
-OBJS	=	$(SRCS:.c=.o)
+OBJS	=	$(SRCS:.s=.o)
 
 %.o		:	%.s
-		$(CC) $(CFLAGS) -c $< -o $@
+		$(AS) $(ASFLAGS) $<
 
 all		:	$(NAME)
 
 $(NAME)	:	$(OBJS)
-		ar rcs $@ $^
+		$(AR) $(ARFLAGS) $@ $^
 
 clean	:
 			rm -rf $(OBJS)
 
 fclean	:	clean
 			rm -rf $(NAME)
+			rm -rf a.out
+			rm -rf *.dSYM
 
-re		:	clean all
+re		:	fclean all
 
-.PHONY	:	re fclean clean all
+test	:	all
+	$(CC) $(LIBS) $(CFLAGS) main.c -g3
+
