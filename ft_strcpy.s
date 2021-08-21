@@ -7,17 +7,14 @@ _ft_strcpy:
 			jmp		loop
 
 loop:
-			cmp		BYTE[rsi], 0
+			cmp		BYTE[rsi + rcx], 0
 			je		end
-			mov		ah, BYTE [rsi]
-			mov		BYTE[rdi], ah
-			inc		rdi
-			inc		rsi
+			mov		dl, BYTE [rsi + rcx]
+			mov		BYTE[rdi + rcx], dl
 			inc		rcx
 			jmp		loop
 
-end:	
-			mov		BYTE[rdi], 0
-			sub		rdi, rcx
+end:
+			mov		BYTE[rdi + rcx], 0
 			mov		rax, rdi
 			ret

@@ -8,7 +8,6 @@ _ft_strlen:
 loop:
 			cmp		BYTE[rdi + rcx], 0
 			je		end
-;			inc		rdi
 			inc		rcx
 			jmp		loop
 

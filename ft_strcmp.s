@@ -18,21 +18,21 @@ loop:
 
 break:
 			xor		rax, rax
-			xor		rbx, rbx
+			xor		rdx, rdx
 			mov		al, BYTE[rdi + rcx]
-			mov		bl, BYTE[rsi + rcx]
-			cmp		rax, rbx
+			mov		dl, BYTE[rsi + rcx]
+			cmp		rax, rdx
 			jb		plus
 			jl		minus
 			je		equal
 
 plus:
-			sub		rax, rbx
+			sub		rax, rdx
 			ret
 
 minus:
-			sub		rbx, rax
-			mov		rax, rbx
+			sub		rdx, rax
+			mov		rax, rdx
 			neg		rax
 			ret
 equal:

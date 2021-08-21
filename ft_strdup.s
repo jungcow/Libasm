@@ -3,6 +3,7 @@ section		.text
 			extern	_malloc
 			extern	_ft_strlen
 			extern	_ft_strcpy
+			extern	___error
 
 _ft_strdup:
 			push	rbp
@@ -17,11 +18,23 @@ _ft_strdup:
 			add		rdi, 1
 			call	_malloc
 
+			cmp		rax, 0
+			je		error
+
 			mov		rdi, rax
 			pop		rsi
 			pop		rsi
 			call	_ft_strcpy
+			mov		rsp, rbp
+			pop		rbp
+			ret		
 
+error:
+			mov		rdx, rax
+			call	___error
+			mov		[rax], rdx
+			mov		rax, 0
 			mov		rsp, rbp
 			pop		rbp
 			ret
+

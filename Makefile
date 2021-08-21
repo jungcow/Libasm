@@ -37,5 +37,5 @@ fclean	:	clean
 re		:	fclean all
 
 test	:	all
-	$(CC) $(LIBS) $(CFLAGS) main.c
+	$(CC) $(LIBS) main.c -g3 -fsanitize=address
 

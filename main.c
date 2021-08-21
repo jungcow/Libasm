@@ -1,4 +1,5 @@
 #include <string.h>
+#include <stdlib.h>
 #include <unistd.h>
 #include <errno.h>
 #include <stdio.h>
@@ -11,7 +12,7 @@ void	strdup_test(char *str1, char *str2)
 	printf("   strdup: %s\n", str2);
 }
 
-void	strcpy_test(char *str)
+void	strcpy_test(char *str, char *str2)
 {
 	char	*cpy1 = "muchmuchmuchmuchlonger";
 	char	*cpy2 = "small";
@@ -19,7 +20,7 @@ void	strcpy_test(char *str)
 	printf("\n=============== FT_STRCPY ================\n");
 	printf("\n[COPY SRC: %s]\n", cpy1);
 	printf("ft_strcpy: %s\n", ft_strcpy(str, cpy1));
-	printf("   strcpy: %s\n", strcpy(str, cpy1));
+	printf("   strcpy: %s\n", strcpy(str2, cpy1));
 	printf("\n[COPY SRC: %s]\n", cpy2);
 	printf("ft_strcpy: %s\n", ft_strcpy(str, cpy2));
 	printf("   strcpy: %s\n", strcpy(str, cpy2));
@@ -99,13 +100,23 @@ int main(void)
 {
 	char	*str;
 	char	*str2;
+	char	buf[100];
+	char	buf2[100];
 
 	str = ft_strdup("helloworld");
+	if (!str)
+	{
+		printf("mallo error\n");
+		return (1);
+	}
 	str2 = strdup("helloworld");
 	strdup_test(str, str2);
-	strcpy_test(str);
+	strcpy_test(buf, buf2);
 	strcmp_test(str);
 	strlen_test(str);
 	write_test(str);
 	read_test();
+	free(str);
+	free(str2);
+	return (0);
 }
