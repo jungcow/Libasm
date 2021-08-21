@@ -5,9 +5,9 @@ section	.text
 
 _ft_write:	
 			push	rbp
-			mov		rax, 0x2000004		; save system call on rax
-			syscall						; invoke routine
-			jc		error				; if error, jump to _error
+			mov		rax, 0x2000004	
+			syscall	
+			jc		error
 			pop		rbp
 			ret
 
