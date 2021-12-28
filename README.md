@@ -60,6 +60,7 @@
 
 ---
 
+
 ## Instruction
 
 > 어셈블리의 장점
@@ -76,7 +77,7 @@
 > 
 - 어셈블리어를 해석하는 어셈블러는 전처리기, 컴파일러 다음에 실행된다.
     
-    ![assembler.png](%5BOuter%20Circle%5D%20Libasm%203fbdf3acfcde4a1ca17be71368492a34/assembler.png)
+    ![assembler](https://user-images.githubusercontent.com/60311340/147561510-ff2de0c6-f51a-4295-8d29-f1cb1e514587.png)
     
 - 어셈블리를 알기 위해선
     - `3개의 section`
@@ -175,7 +176,7 @@ _main:
 > Data Registers
 > 
 
-![data_register.png](%5BOuter%20Circle%5D%20Libasm%203fbdf3acfcde4a1ca17be71368492a34/data_register.png)
+![data_register](https://user-images.githubusercontent.com/60311340/147561545-16ffa649-f6e1-4a16-b94f-de7864e67010.png)
 
 - AX - Accmulator Register로 피 연산자의 결과에 대한 누산기로 사용된다. 따라서 return 값을 저장할 때에도 사용된다.
 - BX - Base Register로 주소값에 대해 index하는 용도, 또는 데이터의 주소를 가리키는 포인터로 사용할 ㅅ 있다고 한다. SI, DI와 결합하여 index에 사용된다.
@@ -185,7 +186,7 @@ _main:
 > Point Registers
 > 
 
-![pointer_register.png](%5BOuter%20Circle%5D%20Libasm%203fbdf3acfcde4a1ca17be71368492a34/pointer_register.png)
+![pointer_register](https://user-images.githubusercontent.com/60311340/147561576-0fce5b01-4219-4086-9415-54044d75aa39.png)
 
 - SP - Stack Pointer 로 스택의 최상단을 가리키는 포인터로 사용된다.
 - BP - Stack Base Pointer 로 스택의 베이스를 가리키는 포인터로 사용된다.
@@ -194,7 +195,7 @@ _main:
 > Index Registers
 > 
 
-![index_register.png](%5BOuter%20Circle%5D%20Libasm%203fbdf3acfcde4a1ca17be71368492a34/index_register.png)
+![index_register](https://user-images.githubusercontent.com/60311340/147561563-ceeac41f-31f5-42e0-b987-3d53895779da.png)
 
 - SI - Source Index Register 로 소스를 가리키는 포인터 또는 index로 사용된다.
 - DI - Deestination Index Register 로 목적지를 가리키는 포인터 또는 Index로 사용된다.
@@ -223,24 +224,24 @@ _main:
 - 여기서 많이 사용했던 것이 Carry Flag와 Zero Flag였다.
 - Carry flag는 시스템콜 호출 후, 에러가 날 시, Carry Flag의 비트에 1을 넣어준다는 것을 이용해 에러 매니징을 하였고, Zero Flag는 cmp 명령어, 또는 test 명령어의 연산 결과로 0이 들어올 때 jump를 해주는 식으로 조건 제어 흐름을 구성하기 위해 사용하였다.
 - 이러한 flag들은 Rflags에 모두 한번에 담겨있다. 총 16비트를 차지하는 Flags Register(Control Register) 이다.
-    
-    ![스크린샷 2021-08-24 오후 5.50.30.png](%5BOuter%20Circle%5D%20Libasm%203fbdf3acfcde4a1ca17be71368492a34/%E1%84%89%E1%85%B3%E1%84%8F%E1%85%B3%E1%84%85%E1%85%B5%E1%86%AB%E1%84%89%E1%85%A3%E1%86%BA_2021-08-24_%E1%84%8B%E1%85%A9%E1%84%92%E1%85%AE_5.50.30.png)
-    
-    - 확인해보기!
+
+    <img width="480" alt="스크린샷_2021-08-20_오전_8 32 46" src="https://user-images.githubusercontent.com/60311340/147561612-f07ee352-bac7-400a-b476-6173d97522f3.png">
+
+- 확인해보기!
         
-        ![스크린샷 2021-08-24 오후 5.41.39.png](%5BOuter%20Circle%5D%20Libasm%203fbdf3acfcde4a1ca17be71368492a34/%E1%84%89%E1%85%B3%E1%84%8F%E1%85%B3%E1%84%85%E1%85%B5%E1%86%AB%E1%84%89%E1%85%A3%E1%86%BA_2021-08-24_%E1%84%8B%E1%85%A9%E1%84%92%E1%85%AE_5.41.39.png)
-        
-        - 해당 사진에서 일부로 write 시스템콜에 에러가 나게끔 fd값으로 -1을 넣어주었다.
-        
-        ![스크린샷 2021-08-24 오후 5.42.12.png](%5BOuter%20Circle%5D%20Libasm%203fbdf3acfcde4a1ca17be71368492a34/%E1%84%89%E1%85%B3%E1%84%8F%E1%85%B3%E1%84%85%E1%85%B5%E1%86%AB%E1%84%89%E1%85%A3%E1%86%BA_2021-08-24_%E1%84%8B%E1%85%A9%E1%84%92%E1%85%AE_5.42.12.png)
-        
-        - 이 사진은 어셈블리 단위에서 system call을 호출하기 직전의 모습이다. 이부분에서 아래의 빨간색 rflags의 값 변화를 잘 봐야한다.
-        
-        ![스크린샷 2021-08-24 오후 5.42.37.png](%5BOuter%20Circle%5D%20Libasm%203fbdf3acfcde4a1ca17be71368492a34/%E1%84%89%E1%85%B3%E1%84%8F%E1%85%B3%E1%84%85%E1%85%B5%E1%86%AB%E1%84%89%E1%85%A3%E1%86%BA_2021-08-24_%E1%84%8B%E1%85%A9%E1%84%92%E1%85%AE_5.42.37.png)
-        
-        - 시스템 콜을 호출한 직후이다.
-        - 여기서 rflags는  206에서 207로 1이 증가하였다.
-        - 여기서 알 수 있듯이 **system call이 에러가 날 시**에 flag의 `첫번째 bit인 carry flag가 1로` 바뀌는 것을 알 수 있다.
+    <img width="480" alt="스크린샷_2021-08-24_오후_5 41 39" src="https://user-images.githubusercontent.com/60311340/147561640-a762cb7f-9a60-42bf-9437-18d6ee1d0596.png">
+
+- 해당 사진에서 일부로 write 시스템콜에 에러가 나게끔 fd값으로 -1을 넣어주었다.
+
+    <img width="480" alt="스크린샷_2021-08-24_오후_5 42 12" src="https://user-images.githubusercontent.com/60311340/147561661-ab83307f-5e9b-4e92-aadc-f49b941fdb34.png">
+
+- 이 사진은 어셈블리 단위에서 system call을 호출하기 직전의 모습이다. 이부분에서 아래의 빨간색 rflags의 값 변화를 잘 봐야한다.
+
+    <img width="585" alt="스크린샷_2021-08-24_오후_5 42 37" src="https://user-images.githubusercontent.com/60311340/147561668-3b3d26cc-1bc3-49ef-877e-07ece94e3a88.png">
+
+- 시스템 콜을 호출한 직후이다.
+- 여기서 rflags는  206에서 207로 1이 증가하였다.
+- 여기서 알 수 있듯이 **system call이 에러가 날 시**에 flag의 `첫번째 bit인 carry flag가 1로` 바뀌는 것을 알 수 있다.
 
 ### Segment Registers
 
@@ -294,12 +295,12 @@ _main:
 - 스택의 데이터에 접근할 때 데이터의 포인터로 사용
 - 함수를 호출한 후, callee 함수는 자신의 지역변수와 받은 인자의 데이터를 모두 rbp 레지스터로 접근 가능하다.
 - 예시:
-    
-    ![스크린샷 2021-08-18 오후 1.57.18.png](%5BOuter%20Circle%5D%20Libasm%203fbdf3acfcde4a1ca17be71368492a34/%E1%84%89%E1%85%B3%E1%84%8F%E1%85%B3%E1%84%85%E1%85%B5%E1%86%AB%E1%84%89%E1%85%A3%E1%86%BA_2021-08-18_%E1%84%8B%E1%85%A9%E1%84%92%E1%85%AE_1.57.18.png)
-    
-    - [rbp+8] → 함수가 종료되고 돌아갈 주소이다.
-    - [rbp+16] → 첫번째 인자에 접근하게 된다.
-    - 위 사진은 e로 시작하는 레지스터(32bit) 이므로 ebp+8로 첫번째 인자에 접근이 가능한 것이다.
+
+    <img width="442" alt="스크린샷_2021-08-15_오전_11 31 13" src="https://user-images.githubusercontent.com/60311340/147561713-25e0c2cc-55db-4784-8cc3-e9e4dfcc7224.png">
+
+- [rbp+8] → 함수가 종료되고 돌아갈 주소이다.
+- [rbp+16] → 첫번째 인자에 접근하게 된다.
+- 위 사진은 e로 시작하는 레지스터(32bit) 이므로 ebp+8로 첫번째 인자에 접근이 가능한 것이다.
 
 > R8 ~ R15
 > 
@@ -524,9 +525,8 @@ xor    rax, rax ; 같은 게 오면 무조건 0
     > 
     - 이는 호출을 하는 사람이 아닌, 호출당한 함수 입장에서 본다면 순서는 달라진다.
     - 말 그대로 스택에는 아래에서부터 쌓이는 거고, e부터 쌓아 올라가서 a까지, 스택에 인자를 미리 쌓아두고, 그다음 함수를 호출하게 되면, a 위부터 쌓이게 된다(정확히는 복귀 번지와 ebp 위에 쌓이게 된다.) 이때 호출된 함수 입장에선, 첫번째 인자는 무조건 위치가 고정되있으므로(ebp 보다 두칸 아래) 쉽게 접근이 가능하다.
-        
-        ![스크린샷 2021-08-15 오전 11.31.13.png](%5BOuter%20Circle%5D%20Libasm%203fbdf3acfcde4a1ca17be71368492a34/%E1%84%89%E1%85%B3%E1%84%8F%E1%85%B3%E1%84%85%E1%85%B5%E1%86%AB%E1%84%89%E1%85%A3%E1%86%BA_2021-08-15_%E1%84%8B%E1%85%A9%E1%84%8C%E1%85%A5%E1%86%AB_11.31.13.png)
-        
+
+        <img width="442" alt="스크린샷_2021-08-15_오전_11 31 13" src="https://user-images.githubusercontent.com/60311340/147561738-f41da5d4-cbad-4e2c-80e4-95d8dce321f2.png">
 
 ---
 
@@ -578,52 +578,48 @@ xor    rax, rax ; 같은 게 오면 무조건 0
     - `mov rax, 0x2000004` 는 rax 레지스터에 시스템콜을 담은 것이다. 즉, 0x2000004는 write 시스템 콜을 나타낸다(mac에서는 그러하고 linux에서나 다른 데에선 다르다).
     - `syscall` 을 호출하면 rax에 있는 시스템 콜이 호출된다.
     - `jc _error` : 이부분은 syscall에서 에러 발생 시, Carry Flag(CF) bit 가 1로 변경된다. 다음과 같이 확인할 수 있다.
+
+        <img width="600" alt="스크린샷_2021-08-20_오전_8 29 27" src="https://user-images.githubusercontent.com/60311340/147561773-b9d253dd-d310-40fc-8331-a8ec30ac7f3a.png">
+
+      - lldb를 이용해 si 명령어로 어셈 단위로 step over 하고 있다.
+      - 현재 syscall을 호출하기 직전의 상황이다.
+      - 현재 flag register의 모습은 다음과 같다.
+
+        <img width="504" alt="스크린샷_2021-08-20_오전_8 31 25" src="https://user-images.githubusercontent.com/60311340/147561815-1c9b2bb3-3321-4c85-b8b1-67ca75d9679c.png">
+
+      - rflags의 값이 206이다. 이는 다음과 같은 flags register table을 참고하자면 CF는 현재 0인 것을 알 수 있다.(맨 첫번째 bit) → CF가 0이면 짝수, 1이면 홀수가 되기 때문에 바로 알 수 있었다.
+
+        <img width="542" alt="스크린샷_2021-08-20_오전_8 32 46" src="https://user-images.githubusercontent.com/60311340/147561823-03bfeb89-4c38-40f2-b435-428bad5a8351.png">
+
+  - 이제 si로 syscall을 호출한 후로 넘어가보자.
+
+    <img width="710" alt="스크린샷_2021-08-20_오전_8 30 34" src="https://user-images.githubusercontent.com/60311340/147561833-8c20d0a3-4c8c-46df-b66c-9e4946e538aa.png">
+
+  - 현재 flags register의 상황을 다음과 같다.
+
+    <img width="524" alt="스크린샷_2021-08-20_오전_8 28 21" src="https://user-images.githubusercontent.com/60311340/147561848-6c0d95a3-08c6-4ee6-8a18-d9c3023315ce.png">
+
+  - syscall에 에러가 난 코드를 실행한 거라, CF에 1이 들어와 홀수로 바뀐 것을 알 수 있다.
+  - 따라서 jc는 CF가 1일 때 해당 label로 jump하도록 하므로 _error label로 점프해서 그 다음 코드를 실행하게 된다.
+    > _error:
         
-        ![스크린샷 2021-08-20 오전 8.29.27.png](%5BOuter%20Circle%5D%20Libasm%203fbdf3acfcde4a1ca17be71368492a34/%E1%84%89%E1%85%B3%E1%84%8F%E1%85%B3%E1%84%85%E1%85%B5%E1%86%AB%E1%84%89%E1%85%A3%E1%86%BA_2021-08-20_%E1%84%8B%E1%85%A9%E1%84%8C%E1%85%A5%E1%86%AB_8.29.27.png)
-        
-        - lldb를 이용해 si 명령어로 어셈 단위로 step over 하고 있다.
-        - 현재 syscall을 호출하기 직전의 상황이다.
-        - 현재 flag register의 모습은 다음과 같다.
-            - 사진 보기
-                
-                ![스크린샷 2021-08-20 오전 8.31.25.png](%5BOuter%20Circle%5D%20Libasm%203fbdf3acfcde4a1ca17be71368492a34/%E1%84%89%E1%85%B3%E1%84%8F%E1%85%B3%E1%84%85%E1%85%B5%E1%86%AB%E1%84%89%E1%85%A3%E1%86%BA_2021-08-20_%E1%84%8B%E1%85%A9%E1%84%8C%E1%85%A5%E1%86%AB_8.31.25.png)
-                
-        - rflags의 값이 206이다. 이는 다음과 같은 flags register table을 참고하자면 CF는 현재 0인 것을 알 수 있다.(맨 첫번째 bit) → CF가 0이면 짝수, 1이면 홀수가 되기 때문에 바로 알 수 있었다.
-            
-            ![스크린샷 2021-08-20 오전 8.32.46.png](%5BOuter%20Circle%5D%20Libasm%203fbdf3acfcde4a1ca17be71368492a34/%E1%84%89%E1%85%B3%E1%84%8F%E1%85%B3%E1%84%85%E1%85%B5%E1%86%AB%E1%84%89%E1%85%A3%E1%86%BA_2021-08-20_%E1%84%8B%E1%85%A9%E1%84%8C%E1%85%A5%E1%86%AB_8.32.46.png)
-            
-        - 이제 si로 syscall을 호출한 후로 넘어가보자.
-            
-            ![스크린샷 2021-08-20 오전 8.30.34.png](%5BOuter%20Circle%5D%20Libasm%203fbdf3acfcde4a1ca17be71368492a34/%E1%84%89%E1%85%B3%E1%84%8F%E1%85%B3%E1%84%85%E1%85%B5%E1%86%AB%E1%84%89%E1%85%A3%E1%86%BA_2021-08-20_%E1%84%8B%E1%85%A9%E1%84%8C%E1%85%A5%E1%86%AB_8.30.34.png)
-            
-        - 현재 flags register의 상황을 다음과 같다.
-            - 사진 보기
-                
-                ![스크린샷 2021-08-20 오전 8.28.21.png](%5BOuter%20Circle%5D%20Libasm%203fbdf3acfcde4a1ca17be71368492a34/%E1%84%89%E1%85%B3%E1%84%8F%E1%85%B3%E1%84%85%E1%85%B5%E1%86%AB%E1%84%89%E1%85%A3%E1%86%BA_2021-08-20_%E1%84%8B%E1%85%A9%E1%84%8C%E1%85%A5%E1%86%AB_8.28.21.png)
-                
-        - syscall에 에러가 난 코드를 실행한 거라, CF에 1이 들어와 홀수로 바뀐 것을 알 수 있다.
-        - 따라서 jc는 CF가 1일 때 해당 label로 jump하도록 하므로 _error label로 점프해서 그 다음 코드를 실행하게 된다.
-        
-        > _error:
-        > 
-        
-        ```wasm
-        _error:
-        			sub		rsp, 8
-        			mov		rdx, rax
-        			call	___error
-        			mov		[rax], rdx
-        			mov		rax, -1
-        			add		rsp, 8
-        			ret
-        ```
-        
-        - `sub rsp, 8` : call ___error를 호출하기 위해선 call instruction 전에 16byte 로 정렬이 되어있어야 한다. 일종의 규칙이라고 한다. 아래 링크를 참고하면 될 것 같다.
-            - [https://stackoverflow.com/questions/672461/what-is-stack-alignment](https://stackoverflow.com/questions/672461/what-is-stack-alignment)
-            - [http://nickdesaulniers.github.io/blog/2014/04/18/lets-write-some-x86-64/](http://nickdesaulniers.github.io/blog/2014/04/18/lets-write-some-x86-64/) 중 16byte만을 검색해서 찾아볼것.
-            - 만약 16byte 정렬을 맞추지 않았다면, call 직후 16byte가 되었는지 확인하는 코드에서 에러가 나게 되어 다음과 같은 오류를 뱉게 된다.
-                
-                ![스크린샷 2021-08-19 오후 9.08.44.png](%5BOuter%20Circle%5D%20Libasm%203fbdf3acfcde4a1ca17be71368492a34/%E1%84%89%E1%85%B3%E1%84%8F%E1%85%B3%E1%84%85%E1%85%B5%E1%86%AB%E1%84%89%E1%85%A3%E1%86%BA_2021-08-19_%E1%84%8B%E1%85%A9%E1%84%92%E1%85%AE_9.08.44.png)
+    ```wasm
+    _error:
+                sub		rsp, 8
+                mov		rdx, rax
+                call	___error
+                mov		[rax], rdx
+                mov		rax, -1
+                add		rsp, 8
+                ret
+    ```
+    
+      - `sub rsp, 8` : call ___error를 호출하기 위해선 call instruction 전에 16byte 로 정렬이 되어있어야 한다. 일종의 규칙이라고 한다. 아래 링크를 참고하면 될 것 같다.
+          - [https://stackoverflow.com/questions/672461/what-is-stack-alignment](https://stackoverflow.com/questions/672461/what-is-stack-alignment)
+          - [http://nickdesaulniers.github.io/blog/2014/04/18/lets-write-some-x86-64/](http://nickdesaulniers.github.io/blog/2014/04/18/lets-write-some-x86-64/) 중 16byte만을 검색해서 찾아볼것.
+          - 만약 16byte 정렬을 맞추지 않았다면, call 직후 16byte가 되었는지 확인하는 코드에서 에러가 나게 되어 다음과 같은 오류를 뱉게 된다.
+
+            <img width="852" alt="스크린샷_2021-08-19_오후_9 08 44" src="https://user-images.githubusercontent.com/60311340/147561864-e9eb9896-e1da-4993-a14c-de3f0fbc68e3.png">
                 
             - 또한 알고 있어야 할 사실은, call을 하게 되면 현재 가지고 있는 PC(rip 레지스터)가 스택에 저장된다. 즉, rsp를 8만큼 빼서 8byte 만큼 차지하게 된다.(jmp는 아무 영향도 끼치지 않는다. 따라서 je는 스택에 영향 X)
             - 이것으로 생각해봤을 때, main 에서 ft_write를 호출할 때 8byte만큼 스택이 늘어났고, 그 뒤로 스택에 영향을 주는 instruction이 없기 때문에 call ___error를 하는 시점에선 16byte 정렬이 되어있지 않게 된다. 따라서 8byte만큼 더 공간을 늘려줘서 총 rsp 가 16byte 늘어나있게 만들어 정렬이 되게끔 한다.
@@ -633,7 +629,6 @@ xor    rax, rax ; 같은 게 오면 무조건 0
         - `mov	[rax], rdx` : rax의 주솟값, 즉 errno의 주솟값에 저장해놨던 errno 값을 넣기 위해 rdx를 대입해주었다.
         - `mov	rax, -1` : ft_write의 반환 값은 -1이어야 하므로 rax에 -1을 대입해주었다.
         - `add    rsp, 8` : ret을 하게 되면 해당 함수를 호출할 때 늘려줬던 스택의 8byte를 다시 빼서 찾아가기 때문에, 이전에 임의로 정렬을 맞추기 위해 늘려줬던 8byte를 다시 줄여줘야 저장했던 rip가 잘 복구된다.
-        - 
 
 > ft_read.s
 > 
@@ -842,52 +837,35 @@ xor    rax, rax ; 같은 게 오면 무조건 0
     - 하지만 ft_strcmp에서 rbx를 다시 되돌리지 않았기에 이러한 현상이 발생했다.
     - 따라서 위와 같이 초기값으로 되돌려 놓는 것을 염두해 두어야 겠다.
     - rbx 대신 rdx를 쓰니 바로 해결,, → 왜 저렇게 초기값으로 돌려놔야 하는거지...?
+
+        <img width="2338" alt="스크린샷_2021-08-21_오후_10 03 30" src="https://user-images.githubusercontent.com/60311340/147561876-057536bf-c7a0-414d-9fc8-8bb4db5c07c8.png">
     
-    ![스크린샷 2021-08-21 오후 10.03.30.png](%5BOuter%20Circle%5D%20Libasm%203fbdf3acfcde4a1ca17be71368492a34/%E1%84%89%E1%85%B3%E1%84%8F%E1%85%B3%E1%84%85%E1%85%B5%E1%86%AB%E1%84%89%E1%85%A3%E1%86%BA_2021-08-21_%E1%84%8B%E1%85%A9%E1%84%92%E1%85%AE_10.03.30.png)
-    
-    [x86 calling conventions - Wikipedia](https://en.wikipedia.org/wiki/X86_calling_conventions#Callee-saved_(non-volatile)_registers)
-    
-    - 여기에 나와있다.
-    - rbx, rsp, rbp, r12-15 레지스터 빼고 나머지 레지스터는 전부 caller에서 저장을 해준다. 그래서 저 레지스터의 값을 보존하는 것은 오로지 callee의 책임이라 초기값을 유지하도록 해야 한다.
+        [x86 calling conventions - Wikipedia](https://en.wikipedia.org/wiki/X86_calling_conventions#Callee-saved_(non-volatile)_registers)
+        
+        - 여기에 나와있다.
+        - rbx, rsp, rbp, r12-15 레지스터 빼고 나머지 레지스터는 전부 caller에서 저장을 해준다. 그래서 저 레지스터의 값을 보존하는 것은 오로지 callee의 책임이라 초기값을 유지하도록 해야 한다.
 
 ---
 
 ## 참고자료
 
 - 참고 주소
-    - 'assembly what is operand?'
-        
-        [어셈블리(Assembly) 언어_2](https://htst.tistory.com/52)
-        
-    - prologue & epilogue
-        
-        [Function prologue - Wikipedia](https://en.wikipedia.org/wiki/Function_prologue)
+    - [assembly what is operand?](https://htst.tistory.com/52)
+    - [prologue & epilogue](https://en.wikipedia.org/wiki/Function_prologue)
         
     - intel vs at&t 문법
+      - [Intel and AT&T Syntax](https://imada.sdu.dk/~kslarsen/dm546/Material/IntelnATT.htm)
+      - [[Assembly] 어셈블리어 기초 사용법 & 예제 총정리](https://coding-factory.tistory.com/651?category=990786)
         
-        [Intel and AT&T Syntax](https://imada.sdu.dk/~kslarsen/dm546/Material/IntelnATT.htm)
+    - [어셈블리 디버깅 시 참고](https://yunreka.tistory.com/5?category=601357)
         
-        [[Assembly] 어셈블리어 기초 사용법 & 예제 총정리](https://coding-factory.tistory.com/651?category=990786)
+    - [어셈블리(비트 연산, 논리연산, 형변환)](https://hyanghope.tistory.com/117)
         
-    - 어셈블리 디버깅 시 참고
+    - [mov, movzx, movsx, 그리고 mov의 규칙에 관하여](https://clansim.tistory.com/35)
         
-        [x32 x64 어셈블리 실행시 메모리 사용 .. 01_셋팅하기](https://yunreka.tistory.com/5?category=601357)
+    - [R format, MIPS, i format, Instruction Set Arcitecture(ISA) 등](https://gusdnd852.tistory.com/180?category=746557)
         
-    - 비트연산, 논리연산, 형변환 등에 관해
-        
-        [[SYSTEM SECURITY]7.어셈블리(비트 연산, 논리연산, 형변환)](https://hyanghope.tistory.com/117)
-        
-    - mov, movzx, movsx, 그리고 mov의 규칙에 관하여
-        
-        [[어셈블리어] 데이터 전송 명령어 mov, movzx, movsx](https://clansim.tistory.com/35)
-        
-    - R format, MIPS, i format, Instruction Set Arcitecture(ISA) 등
-        
-        [명령어 (1) - 개요](https://gusdnd852.tistory.com/180?category=746557)
-        
-    - libasm tester
-        
-        [GitHub - cacharle/libasm_test: libasm test](https://github.com/cacharle/libasm_test)
+    - [libasm tester](https://github.com/cacharle/libasm_test)
         
 
 ## assembly pdf
