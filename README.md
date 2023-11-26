@@ -1,5 +1,4 @@
 # Libasm
-# [Outer Circle] Libasm
 
 - 목차
     1. [Instruction](#instruction)
